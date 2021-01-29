@@ -34,11 +34,11 @@ describe('Dev Server Builder inline critical CSS optimization', () => {
   });
 
   it('works', async () => {
-    const run = await architect.scheduleTarget(target, { browserTarget: 'app:build:production,inline-critical-css' });
+    const run = await architect.scheduleTarget(target, { browserTarget: 'app:build:production,inline-critical-css', port: 0 });
     runs.push(run);
     const output = await run.result as DevServerBuilderOutput;
     expect(output.success).toBe(true);
     const response = await fetch(`${output.baseUrl}/index.html`);
     expect(await response.text()).toContain(`body{color:#000;}`);
-  }, 30000);
+  }, 40000);
 });
